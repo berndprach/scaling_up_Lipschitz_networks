@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Lipschitz"
+version = "0.1.0"
+dependencies = [
+    "torchvision",
+    "matplotlib",
+    "PyYAML",
+]
+
+[project.scripts]
+lipschitz-time = "lipschitz.scripts.basic.time_batch_all:main"
+lipschitz-train = "lipschitz.scripts.train.timed:main"
+lipschitz-plot = "lipschitz.scripts.plot.results:main"
+
+
+[tool.setuptools.packages.find]
+where = ["."]
