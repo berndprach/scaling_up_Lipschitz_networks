@@ -21,16 +21,16 @@ and training time enables a simple MLP to approach state-of-the-art performance.
 
 
 ## Key results
-CPL ConvNet:
+### CPL ConvNet:
 - Surprisingly, the best hyperparameter configuration barely depends on the training time.
-- We managed to get to about $$74\%$$ certified robust test accuracy for perturbation radius $$36 / 255$$.
+- We managed to get to about **74%** certified robust test accuracy for perturbation radius $$36 / 255$$.
 
-AOL MLP:
+### AOL MLP:
 - We get great performance despite the simple architecture. (*Fully connected layers is all you need?*)
 - Large batch size (e.g. 2048) worked well.
 - A width equal to the input image size ($$3072$$) seems optimal independent of the training time.
 - Increasing the depth for longer training runs improved performance.
-- Our best model achieves $$77.6\%$$ certified robust test accuracy (radius $$36 / 255$$) 
+- Our best model achieves **77.6%** certified robust test accuracy (radius $$36 / 255$$) 
 after $$8$$ days of training.
 - Interestingly, the optimal learning rate depended on the batch size linearly in $$\sqrt{b}$$
 (maintaining constant gradient variance).
@@ -81,6 +81,8 @@ for TRAINING_TIME in [0.75, 3, 12, 48, 192]:
     python lipschitz/scripts/train/timed.py -t=TRAINING_TIME -exp="FINAL20M" -u="{'augmentation': {'name': 'color_crop_flip_erase', 'crop_size': 4, 'erase_proportion': 0.}, 'optimizer.lr': 0.3, 'model': {'name': 'AOL-MLP', 'width': 3072, 'depth': 16}, 'dataset': {'name': 'IntegerEDMCIFAR10', 'version': '20M', 'batch_size': 2048, 'use_test_data': True}, 'preprocessing.name': 'convert_and_center'}"
 python lipschitz/scripts/plot/results.py -c="{'arguments.experiment_name': 'FINAL20M'}" -s="configuration.model.depth" -x="arguments.time_in_hours" -xs=log
 ```
+
+## Work done at
 
 <a href="https://ist.ac.at/en/research/lampert-group/">
 <img src="https://berndprach.github.io/images/ISTA_Logo.png" width="160">
